@@ -11,10 +11,10 @@ const allArticles = new Schema({
 		type: String,
 		required: true
 	},
-	summary: {
-		type: String,
-		required: true
-	}
+	// summary: {
+	// 	type: String,
+	// 	required: true
+	// }
 });
 
 const allArticle = mongoose.model('article', allArticles);
