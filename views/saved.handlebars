@@ -1,0 +1,15 @@
+<header>
+	<h1>News Scraper</h1>
+	<a href="/all-articles">Home</a>
+	<a href="/saved-articles">Saved Articles</a>
+</header>
+
+{{#each articles}}
+<ul>
+	<li>{{title}}</li>
+	<li><a href="{{link}}" target="_blank">{{link}}</a></li>
+	<li>{{summary}}</li>
+</ul>
+<button>Delete From Saved</button>
+<button>Article Notes</button>
+{{/each}}

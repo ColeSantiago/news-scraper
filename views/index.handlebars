@@ -1,6 +1,21 @@
+<header>
+	<h1>News Scraper</h1>
+	<a href="/all-articles">Home</a>
+	<a href="/saved-articles">Saved Articles</a>
+	<a href="/scrape"><button>Scrape New Articles!</button></a>
+</header>
+
 {{#each articles}}
 <ul>
 	<li>{{title}}</li>
 	<li><a href="{{link}}" target="_blank">{{link}}</a></li>
+	<li>{{summary}}</li>
 </ul>
+<button class="save-button" 
+	data-title="{{title}}" 
+	data-link="{{link}}"
+	data-summary="{{summary}}"
+	data-id="{{id}}">
+		Save Article
+</button>
 {{/each}}

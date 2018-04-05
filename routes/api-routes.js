@@ -1,21 +1,28 @@
 const express = require('express');
-const request = require("request");
+const request = require('request');
 const cheerio = require('cheerio');
 const axios = require('axios');
 const router = express.Router();
 const db = require('../models/index.js');
 
-router.get("/scrape", function(req, res) {
-  axios.get("https://nerdreactor.com/latest-posts/").then(function(response) {
+router.get('/scrape', function(req, res) {
+  axios.get('https://nerdreactor.com/latest-posts/').then(function(response) {
     let $ = cheerio.load(response.data);
-    $("h4").each(function(i, element) {
-      let result = {};
+    let result = {};
+    $('.item_content').each(function(i, element) {
+
       result.title = $(this)
-        .children("a")
+      	.children('h4')
         .text();
       result.link = $(this)
-        .children("a")
-        .attr("href");
+      	.children('h4')
+        .children('a')
+        .attr('href');
+      result.summary = $(this)
+      	.children('p')
+      	.text();
+
+      	console.log(result);
 
       db.allArticle.create(result)
         .then(function(dbAllArticle) {
@@ -24,11 +31,11 @@ router.get("/scrape", function(req, res) {
           return res.json(err);
         });
     });
-    res.send("Scrape Complete");
+    res.redirect('back');
   });
 });
 
-router.get("/all-articles", function(req, res) {
+router.get('/all-articles', function(req, res) {
   db.allArticle.find({})
     .then(function(results) {
     	res.render('index', { articles: results });
@@ -37,5 +44,50 @@ router.get("/all-articles", function(req, res) {
       res.json(err);
     });
 });
+
+router.get('/saved-articles', function(req, res) {
+	db.savedArticle.find({})
+		.then(function(results) {
+			res.render('saved', { articles: results });
+		})
+		.catch(function(err) {
+      		res.json(err);
+    	});
+});
+
+router.post('/api/save/:id', function(req, res) {
+	db.savedArticle.create({
+		'title': req.body.title,
+		'link': req.body.link,
+		'summary': req.body.link
+	});
+	console.log('article saved!');
+	db.allArticle.remove(
+		{
+			_id: req.params.id
+		},
+		function(error, removed) {
+		    if (error) {
+		        console.log(error);
+		        res.send(error);
+		    } else {
+		    	console.log('removed');
+		     }
+		}
+	);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
