@@ -61,7 +61,7 @@ router.post('/api/save/:id', function(req, res) {
 		'link': req.body.link,
 		'summary': req.body.link
 	});
-	console.log('article saved!');
+	console.log('article saved to saved articles!');
 	db.allArticle.remove(
 		{
 			_id: req.params.id
@@ -71,11 +71,34 @@ router.post('/api/save/:id', function(req, res) {
 		        console.log(error);
 		        res.send(error);
 		    } else {
-		    	console.log('removed');
+		    	console.log('removed from all articles');
 		     }
 		}
 	);
 });
+
+router.post('/api/delete-save/:id', function(req, res) {
+	db.allArticle.create({
+		'title': req.body.title,
+		'link': req.body.link,
+		'summary': req.body.link
+	});
+	console.log('article saved to all articles!');
+	db.savedArticle.remove(
+		{
+			_id: req.params.id
+		},
+		function(error, removed) {
+		    if (error) {
+		        console.log(error);
+		        res.send(error);
+		    } else {
+		    	console.log('removed from saved articles');
+		     }
+		}
+	);
+});
+
 
 
 

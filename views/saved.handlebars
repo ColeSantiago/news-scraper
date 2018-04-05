@@ -10,6 +10,12 @@
 	<li><a href="{{link}}" target="_blank">{{link}}</a></li>
 	<li>{{summary}}</li>
 </ul>
-<button>Delete From Saved</button>
+<button class="delete-article-button" 
+	data-title="{{title}}" 
+	data-link="{{link}}"
+	data-summary="{{summary}}"
+	data-id="{{id}}">
+		Delete From Saved
+</button>
 <button>Article Notes</button>
 {{/each}}
