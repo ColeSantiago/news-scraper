@@ -130,7 +130,4 @@ router.post('/api/delete-comment/:id', function(req, res) {
 	)	
 });
 
-
-
-
 module.exports = router;

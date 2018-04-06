@@ -1,21 +1,30 @@
-<header>
-	<h1>News Scraper</h1>
-	<a href="/all-articles">Home</a>
-	<a href="/saved-articles">Saved Articles</a>
-	<a href="/scrape" class="scrape-button"><button>Scrape New Articles!</button></a>
-</header>
+<div class="wrapper">
+	<header>
+		<div class="header-links">
+			<a href="/all-articles">Home</a>
+			<a href="/saved-articles">Saved Articles</a>
+			<a href="/scrape"><button class="scrape-button">Scrape New Articles!</button></a>
+		</div>
+	</header>
 
-{{#each articles}}
-<ul>
-	<li>{{title}}</li>
-	<li><a href="{{link}}" target="_blank">{{link}}</a></li>
-	<li>{{summary}}</li>
-</ul>
-<button class="save-button" 
-	data-title="{{title}}" 
-	data-link="{{link}}"
-	data-summary="{{summary}}"
-	data-id="{{id}}">
-		Save Article
-</button>
-{{/each}}
+	<div class="photo-header">
+		<img class="photo" src="/img/camera.jpg">
+		<div class="photo-child">
+			<h1>Mongo Article Scraper</h1>
+			<h2>Nerd Reactor</h2>
+		</div>
+	</div>
+
+	<div class="all-article-div">
+		{{#each articles}}
+			<ul>
+				<li class="title">{{title}}</li>
+				<li class="summary">{{summary}}</li>
+				<li class="link"><a href="{{link}}" target="_blank">Read More</a></li>
+				<button class="save-button" data-title="{{title}}" data-link="{{link}}" data-summary="{{summary}}" data-id="{{id}}">
+				Save Article
+			</button>
+			</ul>
+		{{/each}}
+	</div>
+</div>
