@@ -48,14 +48,9 @@ router.get('/all-articles', function(req, res) {
 
 router.get('/saved-articles', function(req, res) {
 	db.SavedArticle.find({})
-		.populate('articleComments', 'body')
+		.populate('articleComments')
 		.then(function(articles) {
-			let comments = [];
-			for (let i = 0; i < articles.length; i++) {
-				let comment = articles[i].articleComments;
-				comments.push(comment);
-			};	
-			res.render('saved', { articles: articles , comments: comments });
+			res.render('saved', { articles: articles });
 		})
 		.catch(function(err) {
       		res.json(err);
@@ -131,15 +126,11 @@ router.post('/api/delete-comment/:id', function(req, res) {
 		       	res.send(error);
 		    } else {
 		    	console.log('removed from saved articles');
+		    	res.redirect('back');
 		    }
 		}
 	)	
 });
-
-
-
-
-
 
 
 

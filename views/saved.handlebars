@@ -4,36 +4,36 @@
 	<a href='/saved-articles'>Saved Articles</a>
 </header>
 
-{{#each articles}}
-<ul>
-	<li>{{title}}</li>
-	<li><a href='{{link}}' target='_blank'>{{link}}</a></li>
-	<li>{{summary}}</li>
-</ul>
-<button class='delete-article-button' 
-	data-title='{{title}}' 
-	data-link='{{link}}'
-	data-summary='{{summary}}'
-	data-id='{{id}}'>
-		Delete From Saved
-</button>
-<button class='modal-button'>Article Notes</button>
+{{#each this.articles}}
+	<ul>
+		<li>{{title}}</li>
+		<li><a href='{{link}}' target='_blank'>{{link}}</a></li>
+		<li>{{summary}}</li>
+	</ul>
+	<button class='delete-article-button' 
+		data-title='{{title}}' 
+		data-link='{{link}}'
+		data-summary='{{summary}}'
+		data-id='{{id}}'>
+			Delete From Saved
+	</button>
 
-	<p>Notes for article: {{_id}}</p>
-	{{articleComments}} <button data-id='{{id}}' class='delete-comment-button'>X</button>
+	
+		<p>Notes for article: {{_id}}</p>
+		{{#articleComments}}
+			<ul>
+				<li>{{body}} <button data-id='{{id}}' class='delete-comment-button'>X</button></li>
+			</ul>  
+		{{/articleComments}} 
 
-	<form action="api/submit/{{id}}" method="POST">
-
-		<input type="text" class='comment-area' placeholder='Add Comment' name='comment'></input>
 		
-		<button type='submit' 
-		class='submit-comment' 
-		data-id='{{id}}'
-		name='submit'>
-			Save Comment
-		</button>
+	<form action="api/submit/{{id}}" method="POST">
+		<input type="text" class='comment-area' placeholder='Add Comment' name='comment'></input>
+		<button type='submit' class='submit-comment' data-id='{{id}}' name='submit'>Save Comment</button>
 	</form>
-
 {{/each}}
+
+
+
 
 

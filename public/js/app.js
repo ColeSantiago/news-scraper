@@ -39,18 +39,10 @@ $(document).ready(function() {
 	});
 
 	$('.submit-comment').on('click', function() {
-		let id = ($(this).data('id'));
-		console.log(id);
-		let comment = $('.comment-area').val().trim();
-		console.log(comment);
-		let newComment = {
-			body: comment
-		}
-
-		// $.post('/submit/' + id, newComment)
-		// 	.then(function() {
-		// 		console.log('comment posted');
-		// 	});
+		// let comment = $('.comment-area').val().trim();
+		// if (comment.length === 0) {
+		// 	alert('Fill in a note!');
+		// };
 	});
 
 	$('.delete-comment-button').on('click', function() {
