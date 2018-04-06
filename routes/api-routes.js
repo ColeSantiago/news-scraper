@@ -4,6 +4,7 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 const router = express.Router();
 const db = require('../models/index.js');
+const app = express();
 
 router.get('/scrape', function(req, res) {
   axios.get('https://nerdreactor.com/latest-posts/').then(function(response) {
@@ -24,7 +25,7 @@ router.get('/scrape', function(req, res) {
 
       	console.log(result);
 
-      db.allArticle.create(result)
+      db.AllArticle.create(result)
         .then(function(dbAllArticle) {
         })
         .catch(function(err) {
@@ -36,7 +37,7 @@ router.get('/scrape', function(req, res) {
 });
 
 router.get('/all-articles', function(req, res) {
-  db.allArticle.find({})
+  db.AllArticle.find({})
     .then(function(results) {
     	res.render('index', { articles: results });
     })
@@ -46,9 +47,10 @@ router.get('/all-articles', function(req, res) {
 });
 
 router.get('/saved-articles', function(req, res) {
-	db.savedArticle.find({})
+	db.SavedArticle.find({})
+		.populate('articleComments', 'body')
 		.then(function(results) {
-			res.render('saved', { articles: results });
+			res.render('saved', { articles: results  });
 		})
 		.catch(function(err) {
       		res.json(err);
@@ -56,13 +58,13 @@ router.get('/saved-articles', function(req, res) {
 });
 
 router.post('/api/save/:id', function(req, res) {
-	db.savedArticle.create({
+	db.SavedArticle.create({
 		'title': req.body.title,
 		'link': req.body.link,
-		'summary': req.body.link
+		'summary': req.body.summary
 	});
 	console.log('article saved to saved articles!');
-	db.allArticle.remove(
+	db.AllArticle.remove(
 		{
 			_id: req.params.id
 		},
@@ -78,13 +80,13 @@ router.post('/api/save/:id', function(req, res) {
 });
 
 router.post('/api/delete-save/:id', function(req, res) {
-	db.allArticle.create({
+	db.AllArticle.create({
 		'title': req.body.title,
 		'link': req.body.link,
 		'summary': req.body.link
 	});
 	console.log('article saved to all articles!');
-	db.savedArticle.remove(
+	db.SavedArticle.remove(
 		{
 			_id: req.params.id
 		},
@@ -99,11 +101,33 @@ router.post('/api/delete-save/:id', function(req, res) {
 	);
 });
 
+router.post('/submit/:id', function(req, res) {
+	db.Comment.create({
+		'body': req.body.body
+	})
+	.then(function(data) {
+		console.log(req.params.id);
+		return db.SavedArticle.findOneAndUpdate(
+			{ _id: req.params.id }, 
+			{ $push: { articleComments: data._id } }, { new: true });
+	})
+});
 
-
-
-
-
+router.delete('/api/delete-comment/:id', function(req, res) {
+	db.Comment.remove(
+		{
+			_id: req.params.id
+		},
+		function(error, removed) {
+			if (error) {
+		        console.log(error);
+		       	res.send(error);
+		    } else {
+		    	console.log('removed from saved articles');
+		    }
+		}
+	)	
+});
 
 
 

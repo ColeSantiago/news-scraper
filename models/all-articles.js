@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const allArticles = new Schema({
+const allArticleSchema = new Schema({
 	title: {
 		type: String,
 		required: true
@@ -17,6 +17,6 @@ const allArticles = new Schema({
 	}
 });
 
-const allArticle = mongoose.model('article', allArticles);
+let AllArticle = mongoose.model('AllArticle', allArticleSchema);
 
-module.exports = allArticle;
+module.exports = AllArticle;

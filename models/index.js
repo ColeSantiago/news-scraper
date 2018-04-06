@@ -1,5 +1,5 @@
 module.exports = {
-  allArticle: require('./all-articles'),
-  savedArticle: require('./saved-articles'),
-  comment: require('./comments')
+	Comment: require('./comments.js'),
+ 	AllArticle: require('./all-articles'),
+  	SavedArticle: require('./saved-articles'),
 };

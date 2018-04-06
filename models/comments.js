@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const comments = new Schema({
+const CommentSchema = new Schema({
 	body: String
 });
 
-let comment = mongoose.model('comment', comments);
+let Comment = mongoose.model('Comment', CommentSchema);
 
-module.exports = comment;
+module.exports = Comment;

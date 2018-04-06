@@ -17,5 +17,19 @@
 	data-id="{{id}}">
 		Delete From Saved
 </button>
-<button>Article Notes</button>
+<button class="modal-button">Article Notes</button>
+
+	<p>Notes for article: {{_id}}</p>
+	{{articleComments}} <button data-id="{{id}}" class="delete-comment-button">X</button>
+
+	<form>
+		<textarea class="comment-area" 
+		placeholder="Add Comment"></textarea>
+		<button type="submit" 
+		class="submit-comment" 
+		data-id="{{id}}"
+		name="submit">
+			Save Comment
+		</button>
+	</form>
 {{/each}}

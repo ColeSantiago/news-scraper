@@ -1,6 +1,7 @@
 $(document).ready(function() {
+	let modal = $('#myModal');
 
-	$('.save-button').on('click', function(result) {
+	$('.save-button').on('click', function() {
 		let id = ($(this).attr('data-id'));
 		let title = ($(this).attr('data-title'));
 		let link = ($(this).attr('data-link'));
@@ -19,7 +20,7 @@ $(document).ready(function() {
 		location.reload();
 	});
 
-	$('.delete-article-button').on('click', function(result) {
+	$('.delete-article-button').on('click', function() {
 		let id = ($(this).attr('data-id'));
 		let title = ($(this).attr('data-title'));
 		let link = ($(this).attr('data-link'));
@@ -37,4 +38,26 @@ $(document).ready(function() {
 		});
 		location.reload();
 	});
+
+	$('.submit-comment').on('click', function() {
+		let id = ($(this).attr('data-id'));
+		let comment = $('.comment-area').val();
+		let newComment = {
+			body: comment
+		}
+
+		$.post('/submit/' + id, newComment)
+			.then(function() {
+				console.log('comment posted');
+			});
+	});
+
+	$('.delete-comment-button').on('click', function() {
+		let id = ($(this).attr('data-id'));
+		$.delete('/api/delete-comment' + id)
+		.then(function() {
+			location.reload();
+		})
+	})
+
 });
