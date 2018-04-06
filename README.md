@@ -10,11 +10,11 @@ This app was built with a Mongodb database and primaily uses Mongoose and Cheeri
 * CSS
 * Javascript
 * Jquery
+* node.js
+* handlebars
 * express
 * express-handlebars
-* mongoose
 * body-parser
-* cheerio
 * request
 
 ## User Walkthrough
