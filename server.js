@@ -14,7 +14,7 @@ let MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoHeadlines
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.static('public'));
