@@ -23,8 +23,6 @@ router.get('/scrape', function(req, res) {
       	.children('p')
       	.text();
 
-      	console.log(result);
-
       db.AllArticle.create(result)
         .then(function(dbAllArticle) {
         })
