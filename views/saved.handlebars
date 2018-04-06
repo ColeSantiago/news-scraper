@@ -1,4 +1,5 @@
 <div class="wrapper">
+	{{!-- header --}}
 	<header>
 		<a href='/all-articles'>Home</a>
 		<a href='/saved-articles'>Saved Articles</a>
@@ -10,7 +11,7 @@
 			<h1>Your Saved Articles</h1>
 		</div>
 	</div>
-	
+	{{!-- all saved articles will be shown here --}}
 	<div class="saved-article-div">
 		<div class="saved-article">
 			{{#each this.articles}}
@@ -21,7 +22,7 @@
 					<button class='delete-article-button' data-title='{{title}}' data-link='{{link}}'data-summary='{{summary}}'data-id='{{id}}'>
 						Delete From Saved
 					</button>
-
+					{{!-- comments for saved articles --}}
 					<div class="comment-div">
 						<p class="comment-header">Notes for article: {{title}}</p>
 						{{#articleComments}}
@@ -30,14 +31,14 @@
 							</ul>  
 						{{/articleComments}}
 					</div>
+					{{!-- form to submit comments --}}
 					<form action="api/submit/{{id}}" method="POST">
 						<input type="text" class='comment-area' placeholder='Add Comment' name='comment'></input>
 						<button type='submit' class='submit-comment' data-id='{{id}}' name='submit'>Save Comment</button>
 					</form>
 				</ul>
+			{{/each}}
 		</div>
-
-		{{/each}}
 	</div>
 </div>
 

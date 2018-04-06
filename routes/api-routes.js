@@ -6,6 +6,8 @@ const router = express.Router();
 const db = require('../models/index.js');
 const app = express();
 
+// the scrape route that will go to the website, scrape the specified items from the page and return them in an object
+// to update the all articles database
 router.get('/scrape', function(req, res) {
   axios.get('https://nerdreactor.com/latest-posts/').then(function(response) {
     let $ = cheerio.load(response.data);
@@ -34,6 +36,7 @@ router.get('/scrape', function(req, res) {
   });
 });
 
+// this route will pull all the the scraped articles from the database and display them with handlebars
 router.get('/all-articles', function(req, res) {
   db.AllArticle.find({})
     .then(function(results) {
@@ -44,6 +47,7 @@ router.get('/all-articles', function(req, res) {
     });
 });
 
+// this route will pull all the the saved articles from the database and display them with handlebars
 router.get('/saved-articles', function(req, res) {
 	db.SavedArticle.find({})
 		.populate('articleComments')
@@ -55,6 +59,8 @@ router.get('/saved-articles', function(req, res) {
     	});
 });
 
+// this route updates the saved article database with the article object passed in and deletes the same one from the 
+// all articles database 
 router.post('/api/save/:id', function(req, res) {
 	db.SavedArticle.create({
 		'title': req.body.title,
@@ -77,11 +83,13 @@ router.post('/api/save/:id', function(req, res) {
 	);
 });
 
+// this route updates the all article database with the article object passed in and deletes the same one from the 
+// saved articles database 
 router.post('/api/delete-save/:id', function(req, res) {
 	db.AllArticle.create({
 		'title': req.body.title,
 		'link': req.body.link,
-		'summary': req.body.link
+		'summary': req.body.summary
 	});
 	console.log('article saved to all articles!');
 	db.SavedArticle.remove(
@@ -99,6 +107,7 @@ router.post('/api/delete-save/:id', function(req, res) {
 	);
 });
 
+// this route saves the submited comment to the databse, as well as updated the specific saved article it is saved to 
 router.post('/api/submit/:id', function(req, res) {
 	console.log(req.body.comment)
 	db.Comment.create({
@@ -113,6 +122,7 @@ router.post('/api/submit/:id', function(req, res) {
 	res.redirect('back');
 });
 
+// this route will delete the comment from the database specified by the id
 router.post('/api/delete-comment/:id', function(req, res) {
 	db.Comment.remove(
 		{

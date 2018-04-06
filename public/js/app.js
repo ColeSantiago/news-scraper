@@ -1,5 +1,7 @@
 $(document).ready(function() {
-
+	
+	 // save article button on click
+	 // this will send the ajax call to the post that will put the passed in object into the database
 	$('.save-button').on('click', function() {
 		let id = ($(this).data('id'));
 		let title = ($(this).data('title'));
@@ -19,6 +21,9 @@ $(document).ready(function() {
 		location.reload();
 	});
 
+	// delete saved article on click
+	// this will send the ajax call to the post that will delete the article matching the id
+	// it will also pass in an object of the deleted article to put back into the all articles database
 	$('.delete-article-button').on('click', function() {
 		let id = ($(this).data('id'));
 		let title = ($(this).data('title'));
@@ -38,13 +43,8 @@ $(document).ready(function() {
 		location.reload();
 	});
 
-	$('.submit-comment').on('click', function() {
-		// let comment = $('.comment-area').val().trim();
-		// if (comment.length === 0) {
-		// 	alert('Fill in a note!');
-		// };
-	});
-
+	// delete comment on click
+	// this will send the ajax call to delete the comment form the database with the specific id
 	$('.delete-comment-button').on('click', function() {
 		let id = ($(this).data('id'));
 		$.post('/api/delete-comment/' + id)

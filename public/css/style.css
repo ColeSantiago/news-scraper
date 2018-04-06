@@ -73,21 +73,6 @@ header {
 		1px 1px 0 #000;
 }
 
-.scrape-button {
-	padding: 15px;
-	background: #8a75ff;
-	font-size: 15px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 4px 3px 11px #000;
-}
-
-.scrape-button:hover {
-	cursor: pointer;
-	background: url(../img/naturalblack.png);
-	color: white;
-}
-
 /*article divs*/
 
 ul {
@@ -105,6 +90,21 @@ ul {
 }
 
 /*buttons*/
+
+.scrape-button {
+	padding: 15px;
+	background: #8a75ff;
+	font-size: 15px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 4px 3px 11px #000;
+}
+
+.scrape-button:hover {
+	cursor: pointer;
+	background: url(../img/naturalblack.png);
+	color: white;
+}
 
 .save-button, .delete-article-button,
 .delete-comment-button, .submit-comment {
