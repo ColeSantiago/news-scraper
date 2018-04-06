@@ -1,11 +1,10 @@
 $(document).ready(function() {
-	let modal = $('#myModal');
 
 	$('.save-button').on('click', function() {
-		let id = ($(this).attr('data-id'));
-		let title = ($(this).attr('data-title'));
-		let link = ($(this).attr('data-link'));
-		let summary = ($(this).attr('data-summary'));
+		let id = ($(this).data('id'));
+		let title = ($(this).data('title'));
+		let link = ($(this).data('link'));
+		let summary = ($(this).data('summary'));
 
 		let savedArticle = {
 			title: title,
@@ -21,10 +20,10 @@ $(document).ready(function() {
 	});
 
 	$('.delete-article-button').on('click', function() {
-		let id = ($(this).attr('data-id'));
-		let title = ($(this).attr('data-title'));
-		let link = ($(this).attr('data-link'));
-		let summary = ($(this).attr('data-summary'));
+		let id = ($(this).data('id'));
+		let title = ($(this).data('title'));
+		let link = ($(this).data('link'));
+		let summary = ($(this).data('summary'));
 
 		let articleToPutBack = {
 			title: title,
@@ -40,24 +39,28 @@ $(document).ready(function() {
 	});
 
 	$('.submit-comment').on('click', function() {
-		let id = ($(this).attr('data-id'));
-		let comment = $('.comment-area').val();
+		let id = ($(this).data('id'));
+		console.log(id);
+		let comment = $('.comment-area').val().trim();
+		console.log(comment);
 		let newComment = {
 			body: comment
 		}
 
-		$.post('/submit/' + id, newComment)
-			.then(function() {
-				console.log('comment posted');
-			});
+		// $.post('/submit/' + id, newComment)
+		// 	.then(function() {
+		// 		console.log('comment posted');
+		// 	});
 	});
 
 	$('.delete-comment-button').on('click', function() {
-		let id = ($(this).attr('data-id'));
-		$.delete('/api/delete-comment' + id)
+		let id = ($(this).data('id'));
+		$.post('/api/delete-comment/' + id)
 		.then(function() {
 			location.reload();
 		})
-	})
+	});
+
+
 
 });

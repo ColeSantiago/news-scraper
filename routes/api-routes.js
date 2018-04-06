@@ -49,8 +49,13 @@ router.get('/all-articles', function(req, res) {
 router.get('/saved-articles', function(req, res) {
 	db.SavedArticle.find({})
 		.populate('articleComments', 'body')
-		.then(function(results) {
-			res.render('saved', { articles: results  });
+		.then(function(articles) {
+			let comments = [];
+			for (let i = 0; i < articles.length; i++) {
+				let comment = articles[i].articleComments;
+				comments.push(comment);
+			};	
+			res.render('saved', { articles: articles , comments: comments });
 		})
 		.catch(function(err) {
       		res.json(err);
@@ -101,9 +106,10 @@ router.post('/api/delete-save/:id', function(req, res) {
 	);
 });
 
-router.post('/submit/:id', function(req, res) {
+router.post('/api/submit/:id', function(req, res) {
+	console.log(req.body.comment)
 	db.Comment.create({
-		'body': req.body.body
+		'body': req.body.comment
 	})
 	.then(function(data) {
 		console.log(req.params.id);
@@ -111,12 +117,13 @@ router.post('/submit/:id', function(req, res) {
 			{ _id: req.params.id }, 
 			{ $push: { articleComments: data._id } }, { new: true });
 	})
+	res.redirect('back');
 });
 
-router.delete('/api/delete-comment/:id', function(req, res) {
+router.post('/api/delete-comment/:id', function(req, res) {
 	db.Comment.remove(
 		{
-			_id: req.params.id
+			'_id': req.params.id
 		},
 		function(error, removed) {
 			if (error) {

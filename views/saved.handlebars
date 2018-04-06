@@ -1,35 +1,39 @@
 <header>
 	<h1>News Scraper</h1>
-	<a href="/all-articles">Home</a>
-	<a href="/saved-articles">Saved Articles</a>
+	<a href='/all-articles'>Home</a>
+	<a href='/saved-articles'>Saved Articles</a>
 </header>
 
 {{#each articles}}
 <ul>
 	<li>{{title}}</li>
-	<li><a href="{{link}}" target="_blank">{{link}}</a></li>
+	<li><a href='{{link}}' target='_blank'>{{link}}</a></li>
 	<li>{{summary}}</li>
 </ul>
-<button class="delete-article-button" 
-	data-title="{{title}}" 
-	data-link="{{link}}"
-	data-summary="{{summary}}"
-	data-id="{{id}}">
+<button class='delete-article-button' 
+	data-title='{{title}}' 
+	data-link='{{link}}'
+	data-summary='{{summary}}'
+	data-id='{{id}}'>
 		Delete From Saved
 </button>
-<button class="modal-button">Article Notes</button>
+<button class='modal-button'>Article Notes</button>
 
 	<p>Notes for article: {{_id}}</p>
-	{{articleComments}} <button data-id="{{id}}" class="delete-comment-button">X</button>
+	{{articleComments}} <button data-id='{{id}}' class='delete-comment-button'>X</button>
 
-	<form>
-		<textarea class="comment-area" 
-		placeholder="Add Comment"></textarea>
-		<button type="submit" 
-		class="submit-comment" 
-		data-id="{{id}}"
-		name="submit">
+	<form action="api/submit/{{id}}" method="POST">
+
+		<input type="text" class='comment-area' placeholder='Add Comment' name='comment'></input>
+		
+		<button type='submit' 
+		class='submit-comment' 
+		data-id='{{id}}'
+		name='submit'>
 			Save Comment
 		</button>
 	</form>
+
 {{/each}}
+
+
