@@ -1,39 +1,42 @@
 <div class="wrapper">
 	<header>
-		<h1>News Scraper</h1>
 		<a href='/all-articles'>Home</a>
 		<a href='/saved-articles'>Saved Articles</a>
 	</header>
+
+	<div class="photo-header">
+		<img class="photo" src="/img/camera.jpg">
+		<div class="photo-child">
+			<h1>Your Saved Articles</h1>
+		</div>
+	</div>
 	
 	<div class="saved-article-div">
 		<div class="saved-article">
 			{{#each this.articles}}
 				<ul>
-					<li>{{title}}</li>
-					<li><a href='{{link}}' target='_blank'>{{link}}</a></li>
+					<li class="title">{{title}}</li>
 					<li>{{summary}}</li>
-				</ul>
-				<button class='delete-article-button' 
-					data-title='{{title}}' 
-					data-link='{{link}}'
-					data-summary='{{summary}}'
-					data-id='{{id}}'>
+					<li><a href='{{link}}' target='_blank'>Read More</a></li>
+					<button class='delete-article-button' data-title='{{title}}' data-link='{{link}}'data-summary='{{summary}}'data-id='{{id}}'>
 						Delete From Saved
-				</button>
+					</button>
+
+					<div class="comment-div">
+						<p class="comment-header">Notes for article: {{title}}</p>
+						{{#articleComments}}
+							<ul>
+								<li>{{body}} <button data-id='{{id}}' class='delete-comment-button'>X</button></li>
+							</ul>  
+						{{/articleComments}}
+					</div>
+					<form action="api/submit/{{id}}" method="POST">
+						<input type="text" class='comment-area' placeholder='Add Comment' name='comment'></input>
+						<button type='submit' class='submit-comment' data-id='{{id}}' name='submit'>Save Comment</button>
+					</form>
+				</ul>
 		</div>
-		<div class="comment-div">
-			<p>Notes for article: {{_id}}</p>
-				{{#articleComments}}
-					<ul>
-						<li>{{body}} <button data-id='{{id}}' class='delete-comment-button'>X</button></li>
-					</ul>  
-				{{/articleComments}} 
-				
-				<form action="api/submit/{{id}}" method="POST">
-					<input type="text" class='comment-area' placeholder='Add Comment' name='comment'></input>
-					<button type='submit' class='submit-comment' data-id='{{id}}' name='submit'>Save Comment</button>
-				</form>
-		</div>
+
 		{{/each}}
 	</div>
 </div>

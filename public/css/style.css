@@ -27,6 +27,8 @@ a {
 		0px 0px 0 #000;
 }
 
+/*header*/
+
 a:hover {
 	cursor: pointer;
 	color: white;
@@ -35,6 +37,12 @@ a:hover {
 header {
 	padding: 25px;
 	background: url(../img/tweed.png);
+}
+
+.header-sentence {
+	margin-top: 10px;
+	float: right;
+	color: white;
 }
 
 .photo-header {
@@ -80,9 +88,11 @@ header {
 	color: white;
 }
 
+/*article divs*/
+
 ul {
 	margin: 20px;
-	padding: 15px;
+	padding: 7px;
 	border-radius: 10px;
 	background: url(../img/tweed.png);
 }
@@ -94,7 +104,10 @@ ul {
 	font-family: 'Fjalla One', sans-serif;
 }
 
-.save-button {
+/*buttons*/
+
+.save-button, .delete-article-button,
+.delete-comment-button, .submit-comment {
 	background: #8a75ff;
 	padding: 10px;
 	border-radius: 5px;
@@ -104,9 +117,45 @@ ul {
 
 }
 
-.save-button:hover {
+.save-button:hover, .delete-article-button:hover,
+.delete-comment-button:hover, .submit-comment:hover {
 	cursor: pointer;
 	background: url(../img/naturalblack.png);
 	color: white;
 	box-shadow: 4px 3px 20px #000;
+}
+
+/*comment divs*/
+
+.comment-div {
+	margin: 10px;
+	background: url(../img/naturalblack.png); 
+	overflow: scroll;
+	max-width: 520px;
+	max-height: 240px;
+}
+
+.comment-header {
+	color: white;
+	text-align: center;
+}
+
+.comment-area {
+	padding: 10px;
+	width: 402px;
+	margin: 10px;
+	margin-top: 25px;
+}
+
+/*mobile view*/
+
+@media only screen and (max-width: 640px) {
+	.photo-child{
+		font-size: 30px;
+		line-height: 30px;
+	}
+
+	.comment-area {
+		width: 280px;
+	}
 }
