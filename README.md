@@ -43,4 +43,4 @@ They can also delete their comments on each article.
 
 ---------
 
-This app can be run on a node server with mongodb, or it can be found [here](https://news-scraper-colesantiago.herokuapp.com/)
+This app can be run on a node server with mongodb, or it can be found [here](https://news-scraper-colesantiago.herokuapp.com/all-articles)
