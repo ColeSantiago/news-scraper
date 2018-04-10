@@ -2,8 +2,8 @@ const express = require('express');
 const request = require('request');
 const cheerio = require('cheerio');
 const axios = require('axios');
-const router = express.Router();
 const db = require('../models/index.js');
+const router = express.Router();
 const app = express();
 
 // the scrape route that will go to the website, scrape the specified items from the page and return them in an object

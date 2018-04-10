@@ -11,12 +11,10 @@ const allArticleSchema = new Schema({
 	link: {
 		type: String,
 		required: true,
-		unique: true
 	},
 	summary: {
 		type: String,
 		required: true,
-		unique: true
 	}
 });
 

@@ -149,6 +149,12 @@ ul {
 
 /*mobile view*/
 
+@media only screen and (max-width: 1303px) {
+	.header-sentence { 
+    	float: none;
+	}
+}
+
 @media only screen and (max-width: 640px) {
 	.photo-child{
 		font-size: 30px;
@@ -157,5 +163,10 @@ ul {
 
 	.comment-area {
 		width: 280px;
+	}
+
+	.header-sentence { 
+		line-height: 20px;
+    	font-size: 18px;
 	}
 }
